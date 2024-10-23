@@ -43,26 +43,23 @@ public class ObjWriter {
         }
     }
 
-    protected static String writeVertices(Vector3f node) {
+    public static String writeVertices(Vector3f node) {
         return OBJ_VERTEX_TOKEN + " " + node.x + " " + node.y + " " + node.z + "\n";
     }
 
-    protected static String writeTextureVertices(Vector2f node) {
+    public static String writeTextureVertices(Vector2f node) {
         return OBJ_TEXTURE_TOKEN + " " + node.x + " " + node.y + "\n";
     }
 
-    protected static String writeNormals(Vector3f node) {
+    public static String writeNormals(Vector3f node) {
         return OBJ_NORMAL_TOKEN + " " + node.x + " " + node.y + " " + node.z + "\n";
     }
 
-    protected static String writePolygons(Polygon polygon) {
+    public static String writePolygons(Polygon polygon) {
         ArrayList<Integer> vertex = polygon.getVertexIndices();
         ArrayList<Integer> textures = polygon.getTextureVertexIndices();
         ArrayList<Integer> normals = polygon.getNormalIndices();
 
-        if (vertex.isEmpty() && textures.isEmpty() && normals.isEmpty()) {
-            throw new ObjWriterException("Polygon shouldn't be empty");
-        }
         StringBuilder result = new StringBuilder(OBJ_FACE_TOKEN);
         if (textures.isEmpty() && normals.isEmpty()) {
             for (Integer coord : vertex) {
