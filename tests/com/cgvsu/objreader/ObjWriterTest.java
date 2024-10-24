@@ -46,12 +46,12 @@ public class ObjWriterTest {
     @DisplayName("записывает полигоны с вершинами, текстурами и нормалями")
     public void testWritePolygonWithVTN() {
         Polygon polygon = new Polygon();
-        polygon.setNormalIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
-        polygon.setTextureVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
-        polygon.setVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
+        polygon.setVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 5, 6, 8)));
+        polygon.setTextureVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        polygon.setNormalIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 5, 4, 6)));
 
         final String result = ObjWriter.writePolygons(polygon);
-        final String expectedResult = "f 2/2/2 3/3/3 4/4/4" + "\n";
+        final String expectedResult = "f 2/2/2 3/3/3 4/4/4 6/5/6 7/6/5 9/7/7" + "\n";
         Assertions.assertEquals(expectedResult, result);
     }
 
@@ -59,8 +59,8 @@ public class ObjWriterTest {
     @DisplayName("записывает полигоны с вершинами и текстурами")
     public void testWritePolygonWithVT() {
         Polygon polygon = new Polygon();
-        polygon.setTextureVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
         polygon.setVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
+        polygon.setTextureVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
 
         final String result = ObjWriter.writePolygons(polygon);
         final String expectedResult = "f 2/2 3/3 4/4" + "\n";
@@ -71,8 +71,8 @@ public class ObjWriterTest {
     @DisplayName("записывает полигоны с вершинами и нормалями")
     public void testWritePolygonWithVN() {
         Polygon polygon = new Polygon();
-        polygon.setNormalIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
         polygon.setVertexIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
+        polygon.setNormalIndices(new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
 
         final String result = ObjWriter.writePolygons(polygon);
         final String expectedResult = "f 2//2 3//3 4//4" + "\n";
